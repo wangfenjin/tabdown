@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Safari Markdown</title>
+    <!--  https://stackoverflow.com/questions/10148711/safari-extension-event-for-a-completely-new-tab/10158395#10158395  -->
+    <script type="text/javascript">
+        function takeOverTab(tabX) {
+            tabX.url = safari.extension.baseURI + "markdown-editor/index.html";
+        }
+
+        function handleBeforeNavigate(e) {
+            clearTimeout(myVar)
+            e.target.removeEventListener('beforeNavigate', handleBeforeNavigate, true);
+            if (e.url === null) {
+                takeOverTab(e.target);
+            }
+        }
+
+        var myVar;
+
+        function handleOpen(e) {
+            if (e.target instanceof SafariBrowserTab) {
+                e.target.addEventListener('beforeNavigate', handleBeforeNavigate, true);
+                myVar = setTimeout(function () {
+                    e.target.removeEventListener('beforeNavigate', handleBeforeNavigate, true);
+                    takeOverTab(e.target);
+                }, 500);
+            }
+        }
+
+        safari.application.addEventListener("open", handleOpen, true);
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

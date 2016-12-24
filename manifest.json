@@ -1,0 +1,19 @@
+{
+  "name": "TabDown",
+  "manifest_version": 2,
+  "version": "1.0.0",
+  "description": "Open new empty tab with Markdown Editor",
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+
+  "background":{
+    "scripts": [ "background.js" ]
+  },
+
+  "permissions": [ "tabs" ],
+
+  "homepage_url": "https://github.com/WangFenjin/tabdown.safariextension"
+}

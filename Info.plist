@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Author</key>
+	<string>WangFenjin</string>
+	<key>Builder Version</key>
+	<string>12602.3.12.0.1</string>
+	<key>CFBundleDisplayName</key>
+	<string>TabDown</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.wangfenjin.tabdown</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>Chrome</key>
+	<dict>
+		<key>Database Quota</key>
+		<integer>10485760</integer>
+		<key>Global Page</key>
+		<string>opentab.html</string>
+	</dict>
+	<key>Description</key>
+	<string>Markdown Editor in New Tab</string>
+	<key>DeveloperIdentifier</key>
+	<string>0000000000</string>
+	<key>ExtensionInfoDictionaryVersion</key>
+	<string>1.0</string>
+	<key>Permissions</key>
+	<dict>
+		<key>Website Access</key>
+		<dict>
+			<key>Include Secure Pages</key>
+			<true/>
+			<key>Level</key>
+			<string>All</string>
+		</dict>
+	</dict>
+	<key>Website</key>
+	<string>http://www.wangfenjin.com/markdown-editor/</string>
+</dict>
+</plist>
