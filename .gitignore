@@ -1,3 +1,4 @@
 .web-extension-id
 web-ext-artifacts/
 node_modules/
+release/

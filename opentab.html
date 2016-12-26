@@ -11,25 +11,43 @@
 
         function handleBeforeNavigate(e) {
             clearTimeout(myVar)
-            e.target.removeEventListener('beforeNavigate', handleBeforeNavigate, true);
-            if (e.url === null) {
-                takeOverTab(e.target);
-            }
+            e.target.removeEventListener('beforeNavigate', handleBeforeNavigate, false);
         }
 
         var myVar;
 
         function handleOpen(e) {
             if (e.target instanceof SafariBrowserTab) {
-                e.target.addEventListener('beforeNavigate', handleBeforeNavigate, true);
+                e.target.addEventListener("beforeNavigate", handleBeforeNavigate, false);
                 myVar = setTimeout(function () {
-                    e.target.removeEventListener('beforeNavigate', handleBeforeNavigate, true);
-                    takeOverTab(e.target);
+                    e.target.removeEventListener("beforeNavigate", handleBeforeNavigate, false);
+                    if (e.target.title === "Untitled") { // Empty Page
+                        takeOverTab(e.target);
+                    }
                 }, 500);
             }
         }
 
+        // inject message will be document.title
+        function waitForMessage(m) {
+            clearTimeout(myVar)
+            if (m.name === "tabdown" && m.message.length == 0) {
+                if (m.target instanceof SafariBrowserTab && m.target.title && m.target.title.length > 0) {
+                    // Loading one tab will receive multiple messages
+                    // There are times document.title is empty but m.target.title is not empty
+                    // do nothing
+                } else {
+                    takeOverTab(m.target);
+                }
+            }
+        }
+
+        // listen for inject message
+        safari.application.addEventListener("message", waitForMessage, false);
+
+        // listen for tab events
         safari.application.addEventListener("open", handleOpen, true);
+        safari.application.addEventListener("beforeNavigate", handleBeforeNavigate, true);
     </script>
 </head>
 
