@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Safari Markdown</title>
+    <!--  https://stackoverflow.com/questions/10148711/safari-extension-event-for-a-completely-new-tab/10158395#10158395  -->
+    <script type="text/javascript">
+        // function takeOverTab(tabX) {
+        //     tabX.url = safari.extension.baseURI + "markdown-editor/index.html";
+        // }
+
+        // function handleBeforeNavigate(e) {
+        //     clearTimeout(myVar)
+        //     e.target.removeEventListener('beforeNavigate', handleBeforeNavigate, false);
+        // }
+
+        // var myVar;
+        // // If we in opened tab and click `Top Sites`, we don't want jump to tabdown
+        // var isTabNewOpen;
+
+        // function handleOpen(e) {
+        //     isTabNewOpen = true;
+        //     if (e.target instanceof SafariBrowserTab) {
+        //         e.target.addEventListener("beforeNavigate", handleBeforeNavigate, false);
+        //         myVar = setTimeout(function () {
+        //             e.target.removeEventListener("beforeNavigate", handleBeforeNavigate, false);
+        //             if (e.target.title === "Untitled") { // Empty Page
+        //                 takeOverTab(e.target);
+        //             }
+        //             // We can't set isTabNewOpen to false, otherwise `tabdown` page will never get opened...
+        //             // isTabNewOpen = false;
+        //         }, 500);
+        //     }
+        // }
+
+        // // inject message will be document.title
+        // function waitForMessage(m) {
+        //     clearTimeout(myVar)
+        //     m.target.removeEventListener('beforeNavigate', handleBeforeNavigate, false);
+        //     if (isTabNewOpen === true && m.name === "tabdown" && m.message.length == 0) {
+        //         if (m.target instanceof SafariBrowserTab && m.target.title && m.target.title.length > 0) {
+        //             // Loading one tab will receive multiple messages
+        //             // There are times document.title is empty but m.target.title is not empty
+        //             // do nothing
+        //         } else {
+        //             takeOverTab(m.target);
+        //         }
+        //     }
+        //     // Always set to false if any messages received
+        //     isTabNewOpen = false
+        // }
+
+        // // listen for inject message
+        // safari.application.addEventListener("message", waitForMessage, false);
+
+        // // listen for tab events
+        // safari.application.addEventListener("open", handleOpen, true);
+
+        function performCommand(event)
+        {
+            if (event.command === "com.wangfenjin.tabdown") {
+                indexUrl = safari.extension.baseURI + "markdown-editor/index.html";
+                openedTabs = safari.application.activeBrowserWindow.tabs
+                for (var i = 0; i < openedTabs.length; i++) {
+                    if (openedTabs[i].url && openedTabs[i].url.startsWith(indexUrl)) {
+                        openedTabs[i].activate();
+                        return;
+                    }
+                }
+                safari.application.activeBrowserWindow.openTab().url = indexUrl;
+            }
+        }
+
+        safari.application.addEventListener("command", performCommand, false);
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

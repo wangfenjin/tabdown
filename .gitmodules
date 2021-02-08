@@ -1,0 +1,4 @@
+[submodule "tabdown/markdown-editor"]
+	path = tabdown/markdown-editor
+	url = git@github.com:wangfenjin/markdown-editor.git
+	branch = tabdown
